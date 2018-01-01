@@ -1,0 +1,11 @@
+.cproject
+.project
+.settings/*
+src/*.a
+src/*.o
+src/*.so*
+*.a
+*.o
+*.so*
+docs/pgampqcpp*
+
