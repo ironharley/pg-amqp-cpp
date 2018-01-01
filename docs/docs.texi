@@ -1,0 +1,238 @@
+\input texinfo   @c -*-texinfo-*-
+@c %**start of header
+@setfilename pgampqcpp.info
+@settitle Postgresql(r) c++ extension for RabbitMQ
+@c For double-sided printing, uncomment:
+@c @setchapternewpage odd
+@c Put everything in one index (arbitrarily chosen to be the concept index).
+
+@syncodeindex vr cp
+@syncodeindex fn cp
+@syncodeindex tp cp
+@synindex pg cp
+@c %**end of header
+
+@include version.texi
+@set BUGADDR the Libtool bug reporting address @email{bug-pgampqcpp@@advantum.ru}
+@set MAILLIST the Libtool mailing list @email{pgampqcpp@@advantum.ru}
+
+@copying
+This manual is for Postgresql(r) c++ extension for RabbitMQ (eq pgampqcpp) (version @value{VERSION}, @value{UPDATED}).
+
+Copyright @copyright{} 2017 Advantum
+
+Permission is granted to copy, distribute and/or modify this document
+under the terms of the GNU Free Documentation License, Version 1.3
+or any later version published by the Free Software Foundation;
+with no Invariant Sections, with no Front-Cover Texts,
+and with no Back-Cover Texts.  A copy of the license is included in
+the section entitled ``GNU Free Documentation License''.
+
+@end copying
+
+@dircategory Software development
+@direntry
+* pgampqcpp: (pgampqcpp).           Postgresql(r) c++ extension for RabbitMQ.
+@end direntry
+
+@dircategory Group extensions
+@direntry
+@end direntry
+
+
+@titlepage
+@title pgampqcpp description
+@subtitle For version @value{VERSION}, @value{UPDATED}
+@author Advantum
+
+@page
+@vskip 0pt plus 1filll
+@insertcopying
+@end titlepage
+
+@c Output the table of contents at the beginning.
+@contents
+
+@ifnottex
+@node Top
+@top Postgresql(r) c++ extension for RabbitMQ (eq pgampqcpp)
+
+This is document contains all documents about pgampqcpp. Only this document can (and has to) be used for settings, tuning and working with one.
+
+@menu
+* Introduction::    The Introduction is the only chapter in this sample.
+* Technical description:: What is it and how does it work?
+* Installation:: 	Installation manual.
+* Configuration:: Config
+* Index::           Complete index.
+
+@detailmenu
+
+Introduction
+Technical description
+* Common::  In common.
+
+Installation
+* Requirements::    		What I have to have?
+* Build from src::			Alas! Nothig other.
+* Postinstall::             What else.
+
+Configuration
+* Core::  Core configuration.
+Index
+
+@end detailmenu
+@end menu
+@end ifnottex
+
+@c =========================  Introduction ====================================
+@node Introduction
+@chapter Introduction
+@cindex chapter, first
+
+
+@cindex pgampqcpp - open source software for work with amqp protocol inside Postgresql
+pgampqcpp - open source software for work with amqp protocol inside Postgresql:
+@enumerate
+@item
+declare, bind/unbind exchange and or queue
+@item
+send message(s)
+@item
+receive message(s) at next rev
+@end enumerate
+
+@b{pgampqcpp} doesn't change any data, hold and retransmitted ones "as is" exclude over protocol transformations. 
+All times inside pgampqcpp at UTC. In that configuration @b{pgampqcpp} requires @copyright{} Postgresql server uppper than 9.1
+
+@c =========================  Technical description ====================================
+@node Technical description
+@chapter Technical description
+@cindex chapter, first
+
+
+@cindex Technical description of pgampqcpp - open source software for receive GIS
+Technical description here. Main things:
+@menu
+* Common::  In common.
+@end menu
+ 
+@c -------------  TD Common -------------------------------
+@node Common
+@c ................
+@section Common 
+@cindex Common to Technical description
+
+
+@c ======================= Installation ======================================
+@node Installation
+@c ................
+@chapter Installation
+
+@cindex chapter, first
+
+It's wrote with g++ (version c++11) over x86_64 CentOS7/RHEL7.2/Fedora 24/Arch
+There's NOT TESTED at ANY OTHER distribs and/or platforms. You can obtain sources and do it youself.
+If someone does not like it -  ure welcome.
+
+@menu
+* Requirements::    		What I have to have?
+* Build from src::			Alas! Nothig other.
+* Postinstall::             What else.
+@end menu
+
+@c -------------  Requirements -------------------------------
+@node Requirements
+@c ................
+@section Requirements to install
+@cindex Requirements to install
+
+@enumerate
+@item
+Common: 
+	@enumerate
+	@item
+        Postgresql upper from 9.1 
+	@item
+		gcc, g++ && GNU make, 
+	@item
+		cmake (need to build AMQP-CPP), 
+	@end enumerate
+
+If you want obtain full functional @b{pgampqcpp} you need to nave also rabbitmq software by network accessed or local
+
+@end enumerate
+Postgresql must be installed locally. pg_config must be in PATH
+
+@b{NOTE}: 
+@c --------------------  Build from src ------------------------
+@node Build from src
+@c ................
+@section Build from src
+@cindex Build from src
+No packages distribution. Nothing else. Build from src only.
+@example
+   BUILD_ROOT  
+             ...
+             docs/pgampqcpp -> @kbd{- this text} will after make doc
+             src       @kbd{- pgampqcpp here},
+             AMQP-CPP - c++ amqp client, if not exist clone it (https://github.com/CopernicaMarketingSoftware/AMQP-CPP.git) here. 
+             sql     @kbd{- sql scripts for extension creation}
+             META.json - postgresql extension description
+             pgampqcpp.json  - extension control file
+             Makefile - try to guess
+             ...
+@end example
+If AMQP-CPP shipped by distribution, than cd one and done `git pull` before other. If one not exist clone it (https://github.com/CopernicaMarketingSoftware/AMQP-CPP.git) here. 
+
+make 
+sudo make install
+
+
+@c --------------------------------------------
+@node Postinstall
+@c ................
+@section Postinstall
+@cindex Postinstall
+Restart postgresql server (need to load so-file) 
+Uncomment (or add next) and put value at your postgresql.conf line:
+
+    `shared_preload_libraries = 'pgamqpcpp.so'`
+    
+and restart postgresql  server.
+If you have previous amqp scheme at database to back up amqp.broker table. Pgamqpcpp is reverce compatible with old, but you can drop old amqp extension. 
+Than login as postgres and do it:
+
+    `bash%> plsql`
+    `postgres=> \c your_database;`
+    `postgres=> create extension pgamqpcpp;`
+
+
+	
+@c ======================= Configuration ======================================
+@node Configuration
+@c ................
+@chapter Configuration
+@cindex chapter, first
+Nothing aspecially required. Log messages at postgresql log.
+
+@menu
+* Core::  Core configuration.
+@end menu
+
+@c -------------  Configuration Core -------------------------------
+@node Core
+@c ................
+@section Core 
+@cindex Core to configuration
+
+
+@c =============================================================
+@node Index
+@unnumbered Index
+
+
+@printindex cp
+
+@bye
+

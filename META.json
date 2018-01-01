@@ -1,0 +1,46 @@
+{
+   "name": "pgamqpcpp",
+   "abstract": "C++ AMQP protocol support for PostgreSQL",
+   "version": "1.0",
+   "description": "The pgamqpcpp package provides the ability for postgres statements to directly publish messages to an AMQP-CPP broker.",
+   "maintainer": [ "advantum" ], 
+   "license": [ "MIT" ],
+   "generated_by": "jmtv",
+   "status": "stable",
+    "prereqs": {
+        "runtime": {
+            "requires": {
+                "PostgreSQL": "9.1.0"
+            }
+        }
+    },
+   "provides": {
+     "amqp": {
+       "file": "sql/pgamqpcpp-1.0.sql",
+       "docfile": "Readme.md",
+       "version": "1.0",
+       "abstract": "C++ AMQP protocol support for PostgreSQL"
+     }
+   },
+   "resources": {
+       "homepage": "http://nobody.nowhere.no/",
+       "bugtracker": {
+           "web": "https://github.com/ironharley/pg-amqp-cpp/issues"
+       },
+       "repository": {
+           "url": "git://github.com/ironharley/pg-amqp-cpp.git",
+           "web": "https://github.com/ironharley/pg-amqp-cpp.git",
+           "type": "git"
+       }
+   },    
+   "meta-spec": {
+      "version": "1.0.0",
+      "url": "http://pgxn.org/meta/spec.txt"
+   },
+   "tags": [
+     "amqp",
+     "rabbitmq",
+     "queue",
+     "postgresql"
+   ]
+}

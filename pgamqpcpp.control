@@ -1,0 +1,6 @@
+# pgamqpcpp extension
+comment = 'C++ AMQP protocol support for PostgreSQL'
+default_version = '1.0'
+module_pathname = '$libdir/pgamqpcpp'
+relocatable = false
+schema = amqp
